@@ -18,8 +18,6 @@ RGFMDA: a novel residual graphSAGE-based model with nonlinear adaptive feature f
   * known disease-miRNA association number.txt:Validated mirNA-disease associations
   * disease number.txt: Disease id and name
   * miRNA number.txt: MiRNA id and name
-### result
-  RGFMDA cross validation results.
 ### code
   * eval.py: The startup code of the program
   * train.py: Train the model
