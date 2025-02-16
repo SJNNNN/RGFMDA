@@ -88,28 +88,27 @@ def data_processing(data, args):
     label = np.array([1] * len(one_index) + [0] * len(zero_index), dtype=int)
     samples = np.concatenate((index, np.expand_dims(label, axis=1)), axis=1)
     # print(samples.shape)
-    #md：从 samples 中提取正样本（标签为 1）的 miRNA 和疾病索引。
-    # md_matrix：根据正样本重新构建关联矩阵，并将其转换为 NumPy 数组
+   
     md = samples[samples[:, 2] == 1, :2]
     md_matrix = make_adj(md, (args.miRNA_number, args.disease_number))
     md_matrix = md_matrix.numpy()
     # print(md_matrix)
     triplet_samples = []
-    miRNA_disease_map = {}  # 用于存储每个miRNA对应的所有疾病
+    miRNA_disease_map = {}  
 
-    # 首先创建miRNA与其关联疾病的映射
+
     for sample in samples:
-        if sample[2] == 1:  # 仅处理正样本
+        if sample[2] == 1:  
             miRNA_idx = sample[0]
             positive_disease_idx = sample[1]
             if miRNA_idx not in miRNA_disease_map:
                 miRNA_disease_map[miRNA_idx] = []
             miRNA_disease_map[miRNA_idx].append(positive_disease_idx)
 
-    # 生成三元组
+
     for miRNA_idx, positive_diseases in miRNA_disease_map.items():
         for positive_disease_idx in positive_diseases:
-            # 生成负样本，确保它不等于当前miRNA关联的所有疾病
+    
             negative_disease_idx = random.choice([d for d in range(args.disease_number) if d not in positive_diseases])
             triplet_samples.append([miRNA_idx, positive_disease_idx, negative_disease_idx])
 
