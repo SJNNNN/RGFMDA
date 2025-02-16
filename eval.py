@@ -9,13 +9,13 @@ import importlib.util
 # print("sys.path:", sys.path)
 # train2_path = "/mnt/data7t/SJNDATA/MAMFGAT-master-main/MAMFGAT-master-main/MAMFGAT-master/train2.py"
 #
-# # 加载模块
+
 # spec = importlib.util.spec_from_file_location("train2", train2_path)
 # train2 = importlib.util.module_from_spec(spec)
 # sys.modules["train2"] = train2
 # spec.loader.exec_module(train2)
 #
-# # 现在可以使用 train2 中的函数
+
 # train = train2.train
 
 from train import train
